@@ -4,9 +4,8 @@ import { User } from "@/domain/users/entities/user";
 export class InMemoryUsersRepository implements UsersRepository {
   public items: User[] = []
 
-  async create(data: User): Promise<User> {
+  async create(data: User): Promise<void> {
     this.items.push(data)
-    return data
   }
 
   async findByEmail(email: string): Promise<User | null> {

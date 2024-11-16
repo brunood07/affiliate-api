@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './infra/env/env';
 import { EnvService } from './infra/env/env.service';
 import { AuthModule } from './infra/auth/auth.module';
+import { PrismaService } from './infra/database/prisma/prisma.service';
+import { HttpModule } from './infra/http/http.module';
 
 @Module({
   imports: [
@@ -10,9 +12,11 @@ import { AuthModule } from './infra/auth/auth.module';
       validate: (env) => envSchema.parse(env),
       isGlobal: true,
     }),
-    AuthModule
+    AuthModule,
+    HttpModule
   ],
   providers: [
+    PrismaService,
     EnvService
   ]
 })
