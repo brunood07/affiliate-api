@@ -11,16 +11,15 @@ describe('Refresh Token Use Case', () => {
     sut = new RefreshTokenUseCase(encrypter)
   })
 
-  it.only('should be able to refresh tokens', async () => {
+  it('should be able to refresh tokens', async () => {
     const refreshToken = await encrypter.encrypt({
-      sub: 'user-1',
+      sub: 'user1',
       isRefreshToken: true,
     })
 
     const result = await sut.execute({
       refreshToken,
     })
-
     expect(result.isRight()).toBe(true)
     if (result.isRight()) {
       expect(result.value).toEqual({
@@ -41,7 +40,7 @@ describe('Refresh Token Use Case', () => {
 
   it('should not refresh tokens with access token', async () => {
     const accessToken = await encrypter.encrypt({
-      sub: 'user-1',
+      sub: 'user1',
       isRefreshToken: false,
     })
 

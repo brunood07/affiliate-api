@@ -20,6 +20,52 @@ model User {
   password  String
   role      UserRole @default(USER)
 
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  Payment   Payment[]
+
+  @@map("tb_users")
+}
+
+model Affiliate {
+  id          String  @id @default(uuid())
+  firstName   String  @map("first_name")
+  lastName    String  @map("last_name")
+  email       String?
+  phoneNumber String  @map("phone_number")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  Payment   Payment[]
+
+  @@map("tb_affiliateds")
+}
+
+model PaymentType {
+  id       String  @id @default(uuid())
+  name     String
+  active   Boolean @default(true)
+  quantity String
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  Payment Payment[]
+
+  @@map("tb_payment_types")
+}
+
+model Payment {
+  id String @id @default(uuid())
+
+  type          PaymentType @relation(fields: [paymentTypeId], references: [id])
+  paymentTypeId String
+
+  affiliate   Affiliate @relation(fields: [affiliateId], references: [id])
+  affiliateId String
+
+  user         User   @relation(fields: [registeredBy], references: [id])
+  registeredBy String @map("registered_by")
+
+  @@map("tb_payments")
 }
