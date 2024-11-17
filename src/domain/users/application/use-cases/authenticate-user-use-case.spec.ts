@@ -40,6 +40,7 @@ describe('Authenticate Student', () => {
     expect(result.isRight()).toBe(true)
     expect(result.value).toEqual({
       accessToken: expect.any(String),
+      refreshToken: expect.any(String),
     })
   })
 })

@@ -4,9 +4,13 @@ import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class JwtEncrypter implements Encrypter {
-  constructor(private jwtService: JwtService) { }
+  constructor(private jwt: JwtService) { }
 
   async encrypt(payload: Record<string, unknown>): Promise<string> {
-    return this.jwtService.signAsync(payload)
+    return this.jwt.signAsync(payload)
+  }
+
+  async verify(token: string): Promise<Record<string, unknown>> {
+    return this.jwt.verify(token)
   }
 }

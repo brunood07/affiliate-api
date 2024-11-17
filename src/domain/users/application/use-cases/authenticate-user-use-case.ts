@@ -6,14 +6,15 @@ import { WrongCredentialsError } from './errors/wrong-credentials-error'
 import { UsersRepository } from '../repositories/users-repositorty'
 
 interface AuthenticateUserUseCaseRequest {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 type AuthenticateUserUseCaseResponse = Either<
   WrongCredentialsError,
   {
-    accessToken: string
+    accessToken: string;
+    refreshToken: string;
   }
 >
 
@@ -29,15 +30,15 @@ export class AuthenticateUserUseCase {
     email,
     password,
   }: AuthenticateUserUseCaseRequest): Promise<AuthenticateUserUseCaseResponse> {
-    const student = await this.usersRepository.findByEmail(email)
+    const user = await this.usersRepository.findByEmail(email)
 
-    if (!student) {
+    if (!user) {
       return left(new WrongCredentialsError())
     }
 
     const isPasswordValid = await this.hashComparer.compare(
       password,
-      student.password,
+      user.password,
     )
 
     if (!isPasswordValid) {
@@ -45,11 +46,17 @@ export class AuthenticateUserUseCase {
     }
 
     const accessToken = await this.encrypter.encrypt({
-      sub: student.id.toString(),
+      sub: user.id.toString(),
+    })
+
+    const refreshToken = await this.encrypter.encrypt({
+      sub: user.id.toString(),
+      isRefreshToken: true,
     })
 
     return right({
       accessToken,
+      refreshToken,
     })
   }
 }
