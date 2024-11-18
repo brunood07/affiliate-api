@@ -67,5 +67,8 @@ model Payment {
   user         User   @relation(fields: [registeredBy], references: [id])
   registeredBy String @map("registered_by")
 
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("tb_payments")
 }
