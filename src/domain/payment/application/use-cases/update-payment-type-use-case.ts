@@ -1,7 +1,7 @@
 import { Either, left, right } from "@/core/either"
 import { PaymentTypesRepository } from "@/domain/payment/application/repositories/payment-types-repository"
 import { PaymentType } from "@/domain/payment/entities/payment-type"
-import { PaymentTypeNotFoundError } from "./errors/payment-type-not-found-error"
+import { PaymentTypeNotFoundError } from "./errors/payment-type-not-found-error copy"
 
 interface UpdatePaymentTypeUseCaseRequest {
   name?: string

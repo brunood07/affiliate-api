@@ -1,6 +1,6 @@
 import { Payment } from "../../entities/payment";
 
-interface ListPaymentsDTO {
+interface ListPaymentsResponseDTO {
   page: number;
   limit: number;
   totalOfRecords: number;
@@ -8,7 +8,13 @@ interface ListPaymentsDTO {
   list: Payment[];
 }
 
+interface ListPaymentsRequestDTO {
+  page: number;
+  limit: number;
+  paymentType: string;
+}
+
 interface UpdatePaymentDTO {
 }
 
-export { ListPaymentsDTO, UpdatePaymentDTO }
+export { ListPaymentsResponseDTO, ListPaymentsRequestDTO, UpdatePaymentDTO }

@@ -1,6 +1,6 @@
 import { Either, left } from "@/core/either"
 import { PaymentTypesRepository } from "@/domain/payment/application/repositories/payment-types-repository"
-import { PaymentTypeNotFoundError } from "./errors/payment-type-not-found-error"
+import { PaymentTypeNotFoundError } from "./errors/payment-type-not-found-error copy"
 
 type DeletePaymentTypeResponseDTO = Either<PaymentTypeNotFoundError, void>
 

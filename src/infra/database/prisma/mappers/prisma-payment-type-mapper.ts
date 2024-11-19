@@ -2,7 +2,6 @@ import { PaymentType as PrismaPaymentType, Prisma } from '@prisma/client'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { PaymentType } from '@/domain/payment/entities/payment-type'
 
-
 export class PrismaPaymentTypeMapper {
   static toDomain(raw: PrismaPaymentType): PaymentType {
 

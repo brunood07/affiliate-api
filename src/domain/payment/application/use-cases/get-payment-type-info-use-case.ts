@@ -1,7 +1,7 @@
 import { PaymentTypesRepository } from "@/domain/payment/application/repositories/payment-types-repository"
-import { PaymentTypeNotFoundError } from "./errors/payment-type-not-found-error"
 import { PaymentType } from "@/domain/payment/entities/payment-type"
 import { Either, left, right } from "@/core/either"
+import { PaymentTypeNotFoundError } from "./errors/payment-type-not-found-error copy"
 
 type GetPaymentTypeInfoResponseDTO = Either<PaymentTypeNotFoundError, {
   paymentType: PaymentType
