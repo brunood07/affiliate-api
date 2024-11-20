@@ -1,7 +1,9 @@
 import { DeletePaymentUseCase } from "@/domain/payment/application/use-cases/delete-payment-use-case";
 import { PaymentNotFoundError } from "@/domain/payment/application/use-cases/errors/payment-not-found-error";
 import { BadRequestException, ConflictException, Controller, Delete, HttpCode, Param } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Payments")
 @Controller("/payments/:id")
 export class DeletePaymentController {
   constructor(private readonly deletePaymentUseCase: DeletePaymentUseCase) { }

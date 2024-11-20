@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { Public } from '@/infra/auth/public'
 import { WrongCredentialsError } from '@/domain/users/application/use-cases/errors/wrong-credentials-error'
 import { AuthenticateUserUseCase } from '@/domain/users/application/use-cases/authenticate-user-use-case'
+import { ApiTags } from '@nestjs/swagger'
 
 const authenticateBodySchemaBodySchema = z.object({
   email: z.string(),
@@ -22,6 +23,7 @@ type AuthenticateUserBodySchemaBodyType = z.infer<
   typeof authenticateBodySchemaBodySchema
 >
 
+@ApiTags("ADMIN")
 @Controller('/sessions')
 @Public()
 export class AuthenticateUserController {

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
 import { CurrentUser } from "@/infra/auth/current-user-decorator";
 import { UserPayload } from "@/infra/auth/jwt.strategy";
+import { ApiTags } from "@nestjs/swagger";
 
 const createPaymentBodySchema = z.object({
   paymentTypeId: z.string(),
@@ -12,6 +13,7 @@ const createPaymentBodySchema = z.object({
 
 type createPaymentBodyType = z.infer<typeof createPaymentBodySchema>
 
+@ApiTags("Payments")
 @Controller("/payments")
 export class CreatePaymentController {
   constructor(private readonly createPaymentUseCase: CreatePaymentUseCase) { }

@@ -3,6 +3,7 @@ import { BadRequestException, Body, ConflictException, Controller, HttpCode, Par
 import { z } from "zod";
 import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
 import { AffiliateNotFound } from "@/domain/affiliate/application/use-cases/errors/affiliate-not-found-error";
+import { ApiTags } from "@nestjs/swagger";
 
 const updateAffiliateBodySchema = z.object({
   firstName: z.string().optional(),
@@ -13,6 +14,7 @@ const updateAffiliateBodySchema = z.object({
 
 type UpdateAffiliateBodyType = z.infer<typeof updateAffiliateBodySchema>
 
+@ApiTags("Affiliates")
 @Controller("/affiliates/:id")
 export class UpdateAffiliateController {
   constructor(private readonly updateAffiliateUseCase: UpdateAffiliateUseCase) { }

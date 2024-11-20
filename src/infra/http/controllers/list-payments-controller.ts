@@ -1,5 +1,6 @@
 import { ListPaymentsUseCase } from "@/domain/payment/application/use-cases/list-payments-use-case";
 import { Controller, Get, Query } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { z } from "zod";
 
 export const listPaymentsSchema = z.object({
@@ -10,6 +11,7 @@ export const listPaymentsSchema = z.object({
 
 type ListPaymentsParamsType = z.infer<typeof listPaymentsSchema>;
 
+@ApiTags("Payments")
 @Controller("/payments/list")
 export class ListPaymentsController {
   constructor(private readonly listPaymentsUseCase: ListPaymentsUseCase) { }

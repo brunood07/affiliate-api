@@ -1,5 +1,6 @@
 import { ListPaymentTypesUseCase } from "@/domain/payment/application/use-cases/list-payment-types-use-case";
 import { Controller, Get, HttpCode, Query } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { z } from "zod";
 
 export const listPaymentTypesSchema = z.object({
@@ -9,6 +10,7 @@ export const listPaymentTypesSchema = z.object({
 
 type ListPaymentTypesParamsType = z.infer<typeof listPaymentTypesSchema>;
 
+@ApiTags("Payment Type")
 @Controller("/payment-type/list")
 export class ListPaymentTypesController {
   constructor(private readonly listPaymentTypesUseCase: ListPaymentTypesUseCase) { }

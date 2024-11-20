@@ -3,6 +3,7 @@ import { UpdatePaymentTypeUseCase } from "@/domain/payment/application/use-cases
 import { BadRequestException, Body, ConflictException, Controller, HttpCode, Param, Put, UsePipes } from "@nestjs/common";
 import { z } from "zod";
 import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
+import { ApiTags } from "@nestjs/swagger";
 
 const updatePaymentTypeBodySchema = z.object({
   name: z.string().optional(),
@@ -12,6 +13,7 @@ const updatePaymentTypeBodySchema = z.object({
 
 type UpdatePaymentTypeBodyType = z.infer<typeof updatePaymentTypeBodySchema>
 
+@ApiTags("Payment Type")
 @Controller('/payment-type/:id')
 export class UpdatePaymentTypeController {
   constructor(private readonly updatePaymentTypeUseCase: UpdatePaymentTypeUseCase) { }

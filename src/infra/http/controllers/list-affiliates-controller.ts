@@ -1,5 +1,6 @@
 import { ListAffiliatesUseCase } from "@/domain/affiliate/application/use-cases/list-affiliates-use-case";
 import { Controller, Get, Query } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { z } from "zod";
 
 export const listAffiliatesSchema = z.object({
@@ -11,11 +12,12 @@ export const listAffiliatesSchema = z.object({
   lastName: z.string().optional()
 });
 
-@Controller("/payment-type/list")
+@ApiTags("Affiliates")
+@Controller("/affiliates")
 export class ListAffiliatesController {
   constructor(private readonly listAffiliatesUseCase: ListAffiliatesUseCase) { }
 
-  @Get()
+  @Get("/list")
   async handle(
     @Query('page') page: string = '1',
     @Query('limit') limit: string = '10',

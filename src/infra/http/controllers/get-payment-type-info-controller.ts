@@ -1,7 +1,9 @@
 import { PaymentTypeNotFoundError } from "@/domain/payment/application/use-cases/errors/payment-type-not-found-error copy";
 import { GetPaymentTypeInfoUseCase } from "@/domain/payment/application/use-cases/get-payment-type-info-use-case";
 import { BadRequestException, ConflictException, Controller, Get, HttpCode, Param } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Payment Type")
 @Controller("/payment-type/:id")
 export class GetPaymentTypeInfoController {
   constructor(private readonly getPaymentTypeInfoUseCase: GetPaymentTypeInfoUseCase) { }

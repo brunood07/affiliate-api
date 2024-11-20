@@ -4,6 +4,7 @@ import { BadRequestException, Body, ConflictException, Controller, HttpCode, Pos
 import { z } from "zod";
 import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
 import { UserAlreadyExistsError } from "@/domain/users/application/use-cases/errors/user-already-exists-error";
+import { ApiTags } from "@nestjs/swagger";
 
 const createUserBodySchema = z.object({
   firstName: z.string(),
@@ -14,6 +15,7 @@ const createUserBodySchema = z.object({
 
 type CreateUserBodyType = z.infer<typeof createUserBodySchema>
 
+@ApiTags("ADMIN")
 @Controller('/users')
 @Public()
 export class CreateUserController {

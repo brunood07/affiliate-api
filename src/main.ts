@@ -9,12 +9,11 @@ async function bootstrap() {
   })
   const envService = app.get(EnvService)
   const config = new DocumentBuilder()
-    .setTitle('Blog API')
-    .setDescription('Personal Blog API')
+    .setTitle('Affiliate API')
+    .setDescription('Affiliate System API')
     .setVersion('1.0')
-    .addTag('blog')
     .build();
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  const documentFactory = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
   const port = envService.get('PORT')
 

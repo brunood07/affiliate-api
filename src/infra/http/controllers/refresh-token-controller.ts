@@ -12,6 +12,7 @@ import { Public } from '@/infra/auth/public'
 import { RefreshTokenUseCase } from '@/domain/users/application/use-cases/refresh-token-use-case'
 import { InvalidRefreshTokenError } from '@/domain/users/application/use-cases/errors/invalid-refresh-token-error'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
+import { ApiTags } from '@nestjs/swagger'
 
 const refreshTokenBodySchema = z.object({
   refreshToken: z.string(),
@@ -19,6 +20,7 @@ const refreshTokenBodySchema = z.object({
 
 type RefreshTokenBodySchemaType = z.infer<typeof refreshTokenBodySchema>
 
+@ApiTags("ADMIN")
 @Controller('/sessions/refresh')
 @Public()
 export class RefreshTokenController {
