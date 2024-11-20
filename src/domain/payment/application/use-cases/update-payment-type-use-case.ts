@@ -9,16 +9,6 @@ interface UpdatePaymentTypeUseCaseRequest {
   active?: boolean
 }
 
-interface UpdatePaymentTypeUseCaseResponse {
-  paymentType: {
-    id: string
-    name: string
-    quantity: string
-    active: boolean
-    updatedAt: Date
-  }
-}
-
 type UpdatePaymentTypeResponseDTO = Either<PaymentTypeNotFoundError,
   {
     paymentType: PaymentType
