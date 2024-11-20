@@ -11,7 +11,7 @@ interface ListPaymentsResponseDTO {
 interface ListPaymentsRequestDTO {
   page: number;
   limit: number;
-  paymentType: string;
+  paymentType?: string;
 }
 
 interface UpdatePaymentDTO {

@@ -5,7 +5,7 @@ import { Payment } from "../../entities/payment";
 interface ListPaymentsRequestDTO {
   page: number;
   limit: number;
-  paymentType: string;
+  paymentType?: string;
 }
 
 type ListPaymentsResponseDTO = Either<null, {
