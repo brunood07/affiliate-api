@@ -21,6 +21,16 @@ import { CreatePaymentUseCase } from '@/domain/payment/application/use-cases/cre
 import { DeletePaymentUseCase } from '@/domain/payment/application/use-cases/delete-payment-use-case';
 import { GetPaymentInfoUseCase } from '@/domain/payment/application/use-cases/get-payment-info-use-case';
 import { ListPaymentsUseCase } from '@/domain/payment/application/use-cases/list-payments-use-case';
+import { CreatePaymentTypeController } from './controllers/create-payment-type-controller';
+import { DeletePaymentTypeController } from './controllers/delete-payment-type-controller';
+import { GetPaymentTypeInfoController } from './controllers/get-payment-type-info-controller';
+import { ListPaymentTypesController } from './controllers/list-payment-types-controller';
+import { UpdatePaymentTypeController } from './controllers/update-payment-type-controller';
+import { CreatePaymentTypeUseCase } from '@/domain/payment/application/use-cases/create-payment-type-use-case';
+import { GetPaymentTypeInfoUseCase } from '@/domain/payment/application/use-cases/get-payment-type-info-use-case';
+import { DeletePaymentTypeUseCase } from '@/domain/payment/application/use-cases/delete-payment-type-use-case';
+import { ListPaymentTypesUseCase } from '@/domain/payment/application/use-cases/list-payment-types-use-case';
+import { UpdatePaymentTypeUseCase } from '@/domain/payment/application/use-cases/update-payment-type-use-case';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -34,7 +44,12 @@ import { ListPaymentsUseCase } from '@/domain/payment/application/use-cases/list
     CreatePaymentController,
     DeletePaymentController,
     GetPaymentInfoController,
-    ListPaymentsController
+    ListPaymentsController,
+    CreatePaymentTypeController,
+    DeletePaymentTypeController,
+    GetPaymentTypeInfoController,
+    ListPaymentTypesController,
+    UpdatePaymentTypeController
   ],
   providers: [
     CreateUserUseCase,
@@ -46,7 +61,12 @@ import { ListPaymentsUseCase } from '@/domain/payment/application/use-cases/list
     CreatePaymentUseCase,
     DeletePaymentUseCase,
     GetPaymentInfoUseCase,
-    ListPaymentsUseCase
+    ListPaymentsUseCase,
+    CreatePaymentTypeUseCase,
+    DeletePaymentTypeUseCase,
+    GetPaymentTypeInfoUseCase,
+    ListPaymentTypesUseCase,
+    UpdatePaymentTypeUseCase
   ],
 })
 export class HttpModule { }
