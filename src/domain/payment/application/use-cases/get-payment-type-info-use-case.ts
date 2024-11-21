@@ -2,11 +2,13 @@ import { PaymentTypesRepository } from "@/domain/payment/application/repositorie
 import { PaymentType } from "@/domain/payment/entities/payment-type"
 import { Either, left, right } from "@/core/either"
 import { PaymentTypeNotFoundError } from "./errors/payment-type-not-found-error copy"
+import { Injectable } from "@nestjs/common"
 
 type GetPaymentTypeInfoResponseDTO = Either<PaymentTypeNotFoundError, {
   paymentType: PaymentType
 }>
 
+@Injectable()
 export class GetPaymentTypeInfoUseCase {
   constructor(private paymentTypesRepository: PaymentTypesRepository) { }
 

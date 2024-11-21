@@ -2,6 +2,7 @@ import { Either, left, right } from "@/core/either";
 import { AffiliateRepository } from "../repositories/affiliates-repository";
 import { Affiliate } from "../../entities/affiliate";
 import { AffiliateNotFound } from "./errors/affiliate-not-found-error";
+import { Injectable } from "@nestjs/common";
 
 interface UpdateAffiliateRequestDTO {
   firstName?: string
@@ -16,6 +17,7 @@ type UpdateAffiliateResponseDTO = Either<AffiliateNotFound,
   }
 >;
 
+@Injectable()
 export class UpdateAffiliateUseCase {
   constructor(private readonly affiliateRepository: AffiliateRepository) { }
 

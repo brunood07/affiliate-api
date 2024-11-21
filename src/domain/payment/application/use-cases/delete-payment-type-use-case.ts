@@ -1,9 +1,11 @@
 import { Either, left } from "@/core/either"
 import { PaymentTypesRepository } from "@/domain/payment/application/repositories/payment-types-repository"
 import { PaymentTypeNotFoundError } from "./errors/payment-type-not-found-error copy"
+import { Injectable } from "@nestjs/common"
 
 type DeletePaymentTypeResponseDTO = Either<PaymentTypeNotFoundError, void>
 
+@Injectable()
 export class DeletePaymentTypeUseCase {
   constructor(private paymentTypesRepository: PaymentTypesRepository) { }
 

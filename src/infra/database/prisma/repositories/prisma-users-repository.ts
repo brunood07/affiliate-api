@@ -7,10 +7,31 @@ import { Injectable } from "@nestjs/common";
 export class PrismaUsersRepository implements UsersRepository {
   constructor(private prisma: PrismaService) { }
 
-  create(data: User): Promise<void> {
-    throw new Error("Method not implemented.");
+  async create(data: User): Promise<void> {
+    await this.prisma.user.create({
+      data: {
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        password: data.password
+      }
+    })
   }
-  findByEmail(email: string): Promise<User | null> {
-    throw new Error("Method not implemented.");
+
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) return null;
+
+    return User.create({
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      password: user.password,
+    });
   }
 }

@@ -7,6 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     // logger: false,
   })
+
+  app.enableCors();
   const envService = app.get(EnvService)
   const config = new DocumentBuilder()
     .setTitle('Affiliate API')

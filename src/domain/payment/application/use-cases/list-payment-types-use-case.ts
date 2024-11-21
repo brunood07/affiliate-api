@@ -1,6 +1,7 @@
 import { Either, right } from "@/core/either"
 import { PaymentTypesRepository } from "@/domain/payment/application/repositories/payment-types-repository"
 import { PaymentType } from "@/domain/payment/entities/payment-type"
+import { Injectable } from "@nestjs/common"
 
 interface ListPaymentTypesUseCaseRequestDTO {
   page: number
@@ -15,6 +16,7 @@ type ListPaymentTypesResponseDTO = Either<null, {
   list: PaymentType[];
 }>
 
+@Injectable()
 export class ListPaymentTypesUseCase {
   constructor(private paymentTypesRepository: PaymentTypesRepository) { }
 

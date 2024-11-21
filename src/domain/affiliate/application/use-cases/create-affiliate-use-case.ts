@@ -3,6 +3,7 @@ import { AffiliateRepository } from "../repositories/affiliates-repository";
 import { Affiliate } from "../../entities/affiliate";
 import { InvalidAffiliateDataError } from "./errors/invalid-affiliate-data-error";
 import { AffiliateAlreadyRegisteredError } from "./errors/affiliate-already-registered-error";
+import { Injectable } from "@nestjs/common";
 
 interface CreateAffiliateRequestDTO {
   firstName: string;
@@ -18,6 +19,7 @@ type CreateAffiliateResponseDTO = Either<
   }
 >
 
+@Injectable()
 export class CreateAffiliateUseCase {
   constructor(private readonly affiliateRepository: AffiliateRepository) { }
 

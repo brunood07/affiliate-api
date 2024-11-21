@@ -1,9 +1,11 @@
 import { Either, left } from "@/core/either";
 import { AffiliateRepository } from "../repositories/affiliates-repository";
 import { AffiliateNotFound } from "./errors/affiliate-not-found-error";
+import { Injectable } from "@nestjs/common";
 
 type DeleteAffiliateResponseDTO = Either<AffiliateNotFound, void>;
 
+@Injectable()
 export class DeleteAffiliateUseCase {
   constructor(private readonly affiliateRepository: AffiliateRepository) { }
 
