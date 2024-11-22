@@ -4,11 +4,11 @@ import { BadRequestException, ConflictException, Controller, Delete, HttpCode, P
 import { ApiTags } from "@nestjs/swagger";
 
 @ApiTags("Payment Type")
-@Controller("/payment-type/:id")
+@Controller("/types")
 export class DeletePaymentTypeController {
   constructor(private readonly deletePaymentTypeUseCase: DeletePaymentTypeUseCase) { }
 
-  @Delete()
+  @Delete("/:id")
   @HttpCode(204)
   async handle(@Param('id') paymentTypeId: string) {
     const result = await this.deletePaymentTypeUseCase.execute(paymentTypeId)

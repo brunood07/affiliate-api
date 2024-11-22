@@ -5,6 +5,7 @@ import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
 import { CurrentUser } from "@/infra/auth/current-user-decorator";
 import { UserPayload } from "@/infra/auth/jwt.strategy";
 import { ApiTags } from "@nestjs/swagger";
+import { PaymentPresenter } from "../presenters/payment-presenter";
 
 const createPaymentBodySchema = z.object({
   paymentTypeId: z.string(),
@@ -30,6 +31,6 @@ export class CreatePaymentController {
       registeredBy
     })
 
-    return result.value;
+    return PaymentPresenter.toHTTP(result.value.payment);
   }
 }

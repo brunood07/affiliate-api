@@ -10,7 +10,7 @@ interface CreatePaymentTypeUseCaseRequest {
 }
 
 type CreatePaymentTypeUseCaseResult = Either<
-  Error,
+  null,
   {
     paymentType: PaymentType
   }

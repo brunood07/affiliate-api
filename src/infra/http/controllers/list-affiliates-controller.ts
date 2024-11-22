@@ -2,6 +2,7 @@ import { ListAffiliatesUseCase } from "@/domain/affiliate/application/use-cases/
 import { Controller, Get, Query } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { z } from "zod";
+import { AffiliatePresenter } from "../presenters/affiliate-presenter";
 
 export const listAffiliatesSchema = z.object({
   page: z.number().default(1),
@@ -44,6 +45,9 @@ export class ListAffiliatesController {
       lastName: params.lastName
     })
 
-    return result.value
+    return {
+      ...result.value,
+      list: result.value.list.map(AffiliatePresenter.toHTTP)
+    }
   }
 }

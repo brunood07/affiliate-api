@@ -4,6 +4,7 @@ import { z } from "zod";
 import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
 import { AffiliateAlreadyRegisteredError } from "@/domain/affiliate/application/use-cases/errors/affiliate-already-registered-error";
 import { ApiTags } from "@nestjs/swagger";
+import { AffiliatePresenter } from "../presenters/affiliate-presenter";
 
 const createAffiliateBodySchema = z.object({
   firstName: z.string(),
@@ -42,6 +43,6 @@ export class CreateAffiliateController {
       }
     }
 
-    return result.value;
+    return AffiliatePresenter.toHTTP(result.value.affiliate);
   }
 }

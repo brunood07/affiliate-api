@@ -4,11 +4,14 @@ import { AppModule } from './app.module';
 import { EnvService } from './infra/env/env.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    // logger: false,
-  })
+  const app = await NestFactory.create(AppModule, {})
 
-  app.enableCors();
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  });
   const envService = app.get(EnvService)
   const config = new DocumentBuilder()
     .setTitle('Affiliate API')

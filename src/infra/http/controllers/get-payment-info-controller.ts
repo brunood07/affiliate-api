@@ -2,6 +2,7 @@ import { PaymentNotFoundError } from "@/domain/payment/application/use-cases/err
 import { GetPaymentInfoUseCase } from "@/domain/payment/application/use-cases/get-payment-info-use-case";
 import { BadRequestException, ConflictException, Controller, Get, HttpCode, Param } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
+import { PaymentPresenter } from "../presenters/payment-presenter";
 
 @ApiTags("Payments")
 @Controller("/payments/:id")
@@ -24,6 +25,6 @@ export class GetPaymentInfoController {
       }
     }
 
-    return result.value;
+    return PaymentPresenter.toHTTP(result.value.payment);
   }
 }

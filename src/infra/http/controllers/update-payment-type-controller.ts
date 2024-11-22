@@ -4,6 +4,7 @@ import { BadRequestException, Body, ConflictException, Controller, HttpCode, Par
 import { z } from "zod";
 import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
 import { ApiTags } from "@nestjs/swagger";
+import { PaymentTypePresenter } from "../presenters/payment-type-presenter";
 
 const updatePaymentTypeBodySchema = z.object({
   name: z.string().optional(),
@@ -14,11 +15,11 @@ const updatePaymentTypeBodySchema = z.object({
 type UpdatePaymentTypeBodyType = z.infer<typeof updatePaymentTypeBodySchema>
 
 @ApiTags("Payment Type")
-@Controller('/payment-type/:id')
+@Controller('/types')
 export class UpdatePaymentTypeController {
   constructor(private readonly updatePaymentTypeUseCase: UpdatePaymentTypeUseCase) { }
 
-  @Put()
+  @Put("/:id")
   @HttpCode(200)
   @UsePipes(new ZodValidationPipe(updatePaymentTypeBodySchema))
   async handle(
@@ -44,6 +45,6 @@ export class UpdatePaymentTypeController {
       }
     }
 
-    return result.value;
+    return PaymentTypePresenter.toHTTP(result.value.paymentType);
   }
 }

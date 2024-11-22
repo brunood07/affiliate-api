@@ -2,13 +2,14 @@ import { PaymentTypeNotFoundError } from "@/domain/payment/application/use-cases
 import { GetPaymentTypeInfoUseCase } from "@/domain/payment/application/use-cases/get-payment-type-info-use-case";
 import { BadRequestException, ConflictException, Controller, Get, HttpCode, Param } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
+import { PaymentTypePresenter } from "../presenters/payment-type-presenter";
 
 @ApiTags("Payment Type")
-@Controller("/payment-type/:id")
+@Controller("/types")
 export class GetPaymentTypeInfoController {
   constructor(private readonly getPaymentTypeInfoUseCase: GetPaymentTypeInfoUseCase) { }
 
-  @Get()
+  @Get("/:id")
   @HttpCode(200)
   async handle(@Param('id') paymentTypeId: string) {
     const result = await this.getPaymentTypeInfoUseCase.execute(paymentTypeId)
@@ -24,6 +25,6 @@ export class GetPaymentTypeInfoController {
       }
     }
 
-    return result.value;
+    return PaymentTypePresenter.toHTTP(result.value.paymentType);
   }
 }
