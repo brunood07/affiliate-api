@@ -86,7 +86,13 @@ export class PrismaPaymentsRepository implements PaymentsRepository {
               lastName: true
             }
           },
-          type: {
+          affiliate: {
+            select: {
+              firstName: true,
+              lastName: true
+            }
+          },
+          paymentType: {
             select: {
               name: true
             }
@@ -110,9 +116,10 @@ export class PrismaPaymentsRepository implements PaymentsRepository {
           registeredByName: payment.user.firstName + ' ' + payment.user.lastName,
           createdAt: payment.createdAt,
           paymentId: payment.id,
-          paymentTypeName: payment.type.name
+          paymentTypeName: payment.paymentType.name,
         }
       }),
+      affiliateName: payments[0] ? payments[0].affiliate?.firstName + ' ' + payments[0].affiliate?.lastName : "",
       limit,
       page,
       totalOfPages: Math.ceil(total / limit),

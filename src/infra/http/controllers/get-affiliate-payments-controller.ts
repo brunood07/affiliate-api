@@ -8,7 +8,6 @@ import { ApiTags } from "@nestjs/swagger";
 export class GetAffiliatePaymentsController {
   constructor(private readonly getAffiliatePaymentsUseCase: GetAffiliatePaymentsUseCase) { }
 
-
   @Get("/:id")
   @HttpCode(200)
   async handle(

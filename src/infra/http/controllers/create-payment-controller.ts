@@ -8,9 +8,11 @@ import { ApiTags } from "@nestjs/swagger";
 import { PaymentPresenter } from "../presenters/payment-presenter";
 
 const createPaymentBodySchema = z.object({
-  paymentTypeId: z.string(),
   affiliateId: z.string(),
+  paymentTypeId: z.string(),
 })
+
+const bodyValidationPipe = new ZodValidationPipe(createPaymentBodySchema)
 
 type createPaymentBodyType = z.infer<typeof createPaymentBodySchema>
 
@@ -21,8 +23,10 @@ export class CreatePaymentController {
 
   @Post()
   @HttpCode(201)
-  @UsePipes(new ZodValidationPipe(createPaymentBodySchema))
-  async handle(@CurrentUser() user: UserPayload, @Body() body: createPaymentBodyType) {
+  async handle(
+    @Body(bodyValidationPipe) body: createPaymentBodyType,
+    @CurrentUser() user: UserPayload,
+  ) {
     const { paymentTypeId, affiliateId } = body;
     const registeredBy = user.sub
     const result = await this.createPaymentUseCase.execute({

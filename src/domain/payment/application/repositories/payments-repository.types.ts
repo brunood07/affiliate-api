@@ -24,6 +24,7 @@ interface ListPaymentsRequestDTO {
 interface FindByAffiliatedIdResponse {
   page: number;
   limit: number;
+  affiliateName: string;
   totalOfRecords: number;
   totalOfPages: number;
   list: PaymentInfo[];

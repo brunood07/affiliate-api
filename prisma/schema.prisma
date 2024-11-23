@@ -20,9 +20,10 @@ model User {
   password  String
   role      UserRole @default(USER)
 
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  Payment   Payment[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  payments Payment[]
 
   @@map("tb_users")
 }
@@ -31,14 +32,15 @@ model Affiliate {
   id          String  @id @default(uuid())
   firstName   String  @map("first_name")
   lastName    String  @map("last_name")
-  email       String?
+  email       String? @unique
   phoneNumber String  @map("phone_number")
 
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  Payment   Payment[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("tb_affiliateds")
+  payments Payment[]
+
+  @@map("tb_affiliates")
 }
 
 model PaymentType {
@@ -50,21 +52,20 @@ model PaymentType {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  Payment Payment[]
+  payments Payment[]
 
   @@map("tb_payment_types")
 }
 
 model Payment {
-  id String @id @default(uuid())
-
-  type          PaymentType @relation(fields: [paymentTypeId], references: [id])
+  id            String      @id @default(uuid())
+  paymentType   PaymentType @relation(fields: [paymentTypeId], references: [id], onDelete: Cascade)
   paymentTypeId String
 
-  affiliate   Affiliate @relation(fields: [affiliateId], references: [id])
+  affiliate   Affiliate @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
   affiliateId String
 
-  user         User   @relation(fields: [registeredBy], references: [id])
+  user         User   @relation(fields: [registeredBy], references: [id], onDelete: Cascade)
   registeredBy String @map("registered_by")
 
   createdAt DateTime @default(now()) @map("created_at")

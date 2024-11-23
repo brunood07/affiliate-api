@@ -2,6 +2,7 @@ import { UsersRepository } from "@/domain/users/application/repositories/users-r
 import { User } from "@/domain/users/entities/user";
 import { PrismaService } from "../prisma.service";
 import { Injectable } from "@nestjs/common";
+import { PrismaUserMapper } from "../mappers/prisma-user-mapper";
 
 @Injectable()
 export class PrismaUsersRepository implements UsersRepository {
@@ -27,11 +28,6 @@ export class PrismaUsersRepository implements UsersRepository {
 
     if (!user) return null;
 
-    return User.create({
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      password: user.password,
-    });
+    return PrismaUserMapper.toDomain(user);
   }
 }

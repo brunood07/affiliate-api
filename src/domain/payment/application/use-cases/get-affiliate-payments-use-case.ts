@@ -3,6 +3,7 @@ import { PaymentsRepository } from "../repositories/payments-repository";
 import { Either, left, right } from "@/core/either";
 import { AffiliateNotFound } from "@/domain/affiliate/application/use-cases/errors/affiliate-not-found-error";
 import { PaymentInfo } from "../repositories/payments-repository.types";
+import { Injectable } from "@nestjs/common";
 
 interface GetAffiliatePaymentsUseCaseRequestDTO {
   affiliateId: string;
@@ -18,6 +19,7 @@ type GetAffiliatePaymentsUseCaseResponseDTO = Either<AffiliateNotFound, {
   list: PaymentInfo[];
 }>
 
+@Injectable()
 export class GetAffiliatePaymentsUseCase {
   constructor(
     private readonly paymentsRepository: PaymentsRepository,

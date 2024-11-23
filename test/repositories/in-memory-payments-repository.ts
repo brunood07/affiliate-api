@@ -69,6 +69,7 @@ export class InMemoryPaymentsRepository implements PaymentsRepository {
       limit,
       totalOfRecords,
       totalOfPages,
+      affiliateName: "",
       list: list.map(payment => ({
         paymentId: payment.id.toString(),
         paymentTypeName: payment.paymentTypeId,
