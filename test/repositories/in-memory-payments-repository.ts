@@ -1,5 +1,5 @@
 import { PaymentsRepository } from "@/domain/payment/application/repositories/payments-repository";
-import { ListPaymentsRequestDTO, ListPaymentsResponseDTO, UpdatePaymentDTO } from "@/domain/payment/application/repositories/payments-repository.types";
+import { FindByAffiliatedIdResponse, ListPaymentsRequestDTO, ListPaymentsResponseDTO, PaymentInfo, UpdatePaymentDTO } from "@/domain/payment/application/repositories/payments-repository.types";
 import { Payment } from "@/domain/payment/entities/payment";
 
 export class InMemoryPaymentsRepository implements PaymentsRepository {
@@ -54,5 +54,27 @@ export class InMemoryPaymentsRepository implements PaymentsRepository {
     if (itemIndex === -1) throw new Error('Payment not found')
 
     this.items.splice(itemIndex, 1)
+  }
+
+  async findByAffiliateId(affiliateId: string, page: number, limit: number): Promise<FindByAffiliatedIdResponse> {
+    const payments = this.items.filter(item => item.affiliateId === affiliateId)
+    const totalOfRecords = payments.length
+    const totalOfPages = Math.ceil(totalOfRecords / limit)
+    const start = (page - 1) * limit
+    const end = start + limit
+    const list = payments.slice(start, end)
+
+    return {
+      page,
+      limit,
+      totalOfRecords,
+      totalOfPages,
+      list: list.map(payment => ({
+        paymentId: payment.id.toString(),
+        paymentTypeName: payment.paymentTypeId,
+        registeredByName: payment.registeredBy,
+        createdAt: new Date()
+      }))
+    }
   }
 }

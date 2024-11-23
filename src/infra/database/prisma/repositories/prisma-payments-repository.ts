@@ -1,7 +1,7 @@
 import { PaymentsRepository } from "@/domain/payment/application/repositories/payments-repository";
 import { PrismaService } from "../prisma.service";
 import { Injectable } from "@nestjs/common";
-import { ListPaymentsRequestDTO, ListPaymentsResponseDTO, UpdatePaymentDTO } from "@/domain/payment/application/repositories/payments-repository.types";
+import { FindByAffiliatedIdResponse, ListPaymentsRequestDTO, ListPaymentsResponseDTO, UpdatePaymentDTO } from "@/domain/payment/application/repositories/payments-repository.types";
 import { Payment } from "@/domain/payment/entities/payment";
 import { PrismaPaymentMapper } from "../mappers/prisma-payment-mapper";
 
@@ -69,5 +69,54 @@ export class PrismaPaymentsRepository implements PaymentsRepository {
     await this.prismaService.payment.delete({
       where: { id }
     });
+  }
+
+  async findByAffiliateId(affiliateId: string, page: number, limit: number): Promise<FindByAffiliatedIdResponse> {
+    const [payments, total] = await this.prismaService.$transaction([
+      this.prismaService.payment.findMany({
+        where: {
+          affiliateId
+        },
+        select: {
+          id: true,
+          createdAt: true,
+          user: {
+            select: {
+              firstName: true,
+              lastName: true
+            }
+          },
+          type: {
+            select: {
+              name: true
+            }
+          }
+        },
+        orderBy: {
+          createdAt: 'desc'
+        }
+      }),
+      this.prismaService.payment.count({
+        where: {
+          affiliateId
+        }
+      })
+    ])
+
+
+    return {
+      list: payments.map(payment => {
+        return {
+          registeredByName: payment.user.firstName + ' ' + payment.user.lastName,
+          createdAt: payment.createdAt,
+          paymentId: payment.id,
+          paymentTypeName: payment.type.name
+        }
+      }),
+      limit,
+      page,
+      totalOfPages: Math.ceil(total / limit),
+      totalOfRecords: total
+    };
   }
 }

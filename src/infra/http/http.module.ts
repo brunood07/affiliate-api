@@ -33,6 +33,8 @@ import { ListPaymentTypesUseCase } from '@/domain/payment/application/use-cases/
 import { UpdatePaymentTypeUseCase } from '@/domain/payment/application/use-cases/update-payment-type-use-case';
 import { DeleteAffiliateController } from './controllers/delete-affiliate-controller';
 import { DeleteAffiliateUseCase } from '@/domain/affiliate/application/use-cases/delete-affiliate-use-case';
+import { GetAffiliatePaymentsController } from './controllers/get-affiliate-payments-controller';
+import { GetAffiliatePaymentsUseCase } from '@/domain/payment/application/use-cases/get-affiliate-payments-use-case';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -42,6 +44,7 @@ import { DeleteAffiliateUseCase } from '@/domain/affiliate/application/use-cases
     RefreshTokenController,
     CreateAffiliateController,
     DeleteAffiliateController,
+    GetAffiliatePaymentsController,
     ListAffiliatesController,
     UpdateAffiliateController,
     CreatePaymentController,
@@ -60,6 +63,7 @@ import { DeleteAffiliateUseCase } from '@/domain/affiliate/application/use-cases
     RefreshTokenUseCase,
     CreateAffiliateUseCase,
     DeleteAffiliateUseCase,
+    GetAffiliatePaymentsUseCase,
     ListAffiliatesUseCase,
     UpdateAffiliateUseCase,
     CreatePaymentUseCase,
