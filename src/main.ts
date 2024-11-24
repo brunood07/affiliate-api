@@ -11,7 +11,7 @@ async function bootstrap() {
   const cors = envService.get('CORS')
   app.enableCors({
     origin: cors,
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
