@@ -1,5 +1,5 @@
 import { UpdateAffiliateUseCase } from "@/domain/affiliate/application/use-cases/update-affiliate-use-case";
-import { BadRequestException, Body, ConflictException, Controller, HttpCode, Param, Put, UsePipes } from "@nestjs/common";
+import { BadRequestException, Body, ConflictException, Controller, HttpCode, Param, Put } from "@nestjs/common";
 import { z } from "zod";
 import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
 import { AffiliateNotFound } from "@/domain/affiliate/application/use-cases/errors/affiliate-not-found-error";
@@ -22,10 +22,9 @@ export class UpdateAffiliateController {
 
   @Put()
   @HttpCode(200)
-  @UsePipes(new ZodValidationPipe(updateAffiliateBodySchema))
   async handle(
     @Param('id') affiliateId: string,
-    @Body() body: UpdateAffiliateBodyType
+    @Body(new ZodValidationPipe(updateAffiliateBodySchema)) body: UpdateAffiliateBodyType
   ) {
     const { firstName, lastName, email, phoneNumber } = body
 

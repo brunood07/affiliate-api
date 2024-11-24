@@ -1,4 +1,4 @@
-import { Either, left } from "@/core/either";
+import { Either, left, right } from "@/core/either";
 import { PaymentsRepository } from "../repositories/payments-repository";
 import { PaymentNotFoundError } from "./errors/payment-not-found-error";
 import { Injectable } from "@nestjs/common";
@@ -13,5 +13,7 @@ export class DeletePaymentUseCase {
     const paymentExists = await this.paymentsRepository.findById(id)
     if (!paymentExists) return left(new PaymentNotFoundError());
     await this.paymentsRepository.delete(id)
+
+    return right(undefined);
   }
 }

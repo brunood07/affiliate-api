@@ -1,5 +1,5 @@
 import { DeletePaymentTypeUseCase } from "@/domain/payment/application/use-cases/delete-payment-type-use-case";
-import { PaymentTypeNotFoundError } from "@/domain/payment/application/use-cases/errors/payment-type-not-found-error copy";
+import { PaymentTypeNotFoundError } from "@/domain/payment/application/use-cases/errors/payment-type-not-found-error";
 import { BadRequestException, ConflictException, Controller, Delete, HttpCode, Param } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 

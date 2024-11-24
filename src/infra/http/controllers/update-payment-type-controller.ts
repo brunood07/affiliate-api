@@ -1,6 +1,6 @@
-import { PaymentTypeNotFoundError } from "@/domain/payment/application/use-cases/errors/payment-type-not-found-error copy";
+import { PaymentTypeNotFoundError } from "@/domain/payment/application/use-cases/errors/payment-type-not-found-error";
 import { UpdatePaymentTypeUseCase } from "@/domain/payment/application/use-cases/update-payment-type-use-case";
-import { BadRequestException, Body, ConflictException, Controller, HttpCode, Param, Put, UsePipes } from "@nestjs/common";
+import { BadRequestException, Body, ConflictException, Controller, HttpCode, Param, Put } from "@nestjs/common";
 import { z } from "zod";
 import { ZodValidationPipe } from "../pipes/zod-validation-pipe";
 import { ApiTags } from "@nestjs/swagger";
@@ -21,10 +21,9 @@ export class UpdatePaymentTypeController {
 
   @Put("/:id")
   @HttpCode(200)
-  @UsePipes(new ZodValidationPipe(updatePaymentTypeBodySchema))
   async handle(
     @Param('id') paymentTypeId: string,
-    @Body() body: UpdatePaymentTypeBodyType
+    @Body(new ZodValidationPipe(updatePaymentTypeBodySchema)) body: UpdatePaymentTypeBodyType
   ) {
     const { active, name, quantity } = body
 
