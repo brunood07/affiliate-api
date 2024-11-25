@@ -68,4 +68,8 @@ export class InMemoryAffiliatesRepository implements AffiliateRepository {
       this.items.splice(affiliateIndex, 1);
     }
   }
+
+  async countTotalAffiliatesInMonth(month: string): Promise<number> {
+    return this.items.length;
+  }
 }

@@ -78,4 +78,26 @@ export class InMemoryPaymentsRepository implements PaymentsRepository {
       }))
     }
   }
+
+  async countAffiliatesWithCompletePaymentsInMonth(month: string): Promise<number> {
+    const startOfMonth = new Date(month)
+    const endOfMonth = new Date(new Date(month).setMonth(startOfMonth.getMonth() + 1))
+
+    const paymentsInMonth = this.items.filter(payment => 
+      new Date() >= startOfMonth && 
+      new Date() < endOfMonth
+    )
+
+    const affiliatePayments = new Map<string, number>()
+    
+    paymentsInMonth.forEach(payment => {
+      const current = affiliatePayments.get(payment.affiliateId.toString()) || 0
+      affiliatePayments.set(payment.affiliateId.toString(), current + 1)
+    })
+
+    const totalRequiredPayments = 3 // Example number of required payments
+    return Array.from(affiliatePayments.values()).filter(count => 
+      count === totalRequiredPayments
+    ).length
+  }
 }

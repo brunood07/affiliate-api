@@ -37,6 +37,8 @@ import { GetAffiliatePaymentsController } from './controllers/get-affiliate-paym
 import { GetAffiliatePaymentsUseCase } from '@/domain/payment/application/use-cases/get-affiliate-payments-use-case';
 import { GetAffiliateInfoController } from './controllers/get-affiliate-info-controller';
 import { GetAffiliateInfoUseCase } from '@/domain/affiliate/application/use-cases/get-affiliate-info-use-case';
+import { GetAffiliatesAndPaymentInfoPerMonthUseCase } from '@/domain/payment/application/use-cases/get-affiliates-and-payments-info-per-month-use-case';
+import { GetAffiliatesAndPaymentInfoPerMonthController } from './controllers/get-affiliates-and-payments-info-per-month-controller';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -58,7 +60,8 @@ import { GetAffiliateInfoUseCase } from '@/domain/affiliate/application/use-case
     DeletePaymentTypeController,
     GetPaymentTypeInfoController,
     ListPaymentTypesController,
-    UpdatePaymentTypeController
+    UpdatePaymentTypeController,
+    GetAffiliatesAndPaymentInfoPerMonthController
   ],
   providers: [
     CreateUserUseCase,
@@ -78,7 +81,8 @@ import { GetAffiliateInfoUseCase } from '@/domain/affiliate/application/use-case
     DeletePaymentTypeUseCase,
     GetPaymentTypeInfoUseCase,
     ListPaymentTypesUseCase,
-    UpdatePaymentTypeUseCase
+    UpdatePaymentTypeUseCase,
+    GetAffiliatesAndPaymentInfoPerMonthUseCase
   ],
 })
 export class HttpModule { }

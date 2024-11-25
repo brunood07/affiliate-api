@@ -8,4 +8,5 @@ export abstract class AffiliateRepository {
   abstract list(params: ListAffiliatesParams): Promise<ListAffiliatesResponseDTO>;
   abstract update(id: string, data: UpdateAffiliateInfoRequestDTO): Promise<Affiliate>;
   abstract delete(id: string): Promise<void>;
+  abstract countTotalAffiliatesInMonth(month: string): Promise<number>;
 }

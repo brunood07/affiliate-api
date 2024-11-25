@@ -8,4 +8,5 @@ export abstract class PaymentsRepository {
   abstract list(params: ListPaymentsRequestDTO): Promise<ListPaymentsResponseDTO>
   abstract update(id: string, data: UpdatePaymentDTO): Promise<Payment>
   abstract delete(id: string): Promise<void>
+  abstract countAffiliatesWithCompletePaymentsInMonth(month: string): Promise<number>;
 }

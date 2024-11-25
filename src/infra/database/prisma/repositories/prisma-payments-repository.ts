@@ -126,4 +126,40 @@ export class PrismaPaymentsRepository implements PaymentsRepository {
       totalOfRecords: total
     };
   }
+
+  async countAffiliatesWithCompletePaymentsInMonth(month: string): Promise<number> {
+    const startOfMonth = new Date(month)
+    const endOfMonth = new Date(new Date(month).setMonth(startOfMonth.getMonth() + 1))
+
+    const result = await this.prismaService.payment.groupBy({
+      by: ['affiliateId'],
+      where: {
+        createdAt: {
+          gte: startOfMonth,
+          lt: endOfMonth
+        },
+        paymentType: {
+          active: true
+        }
+      },
+      _count: {
+        id: true
+      },
+      having: {
+        id: {
+          _count: {
+            equals: await this.getTotalActivePaymentTypes()
+          }
+        }
+      }
+    })
+
+    return result.length  
+  }
+
+  private async getTotalActivePaymentTypes(): Promise<number> {
+    return await this.prismaService.paymentType.count({
+      where: { active: true }
+    })
+  }
 }

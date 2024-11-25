@@ -100,4 +100,19 @@ export class PrismaAffiliateRepository implements AffiliateRepository {
       where: { id }
     });
   }
-}
+
+  async countTotalAffiliatesInMonth(month: string): Promise<number> {
+    const startOfMonth = new Date(month);
+    const endOfMonth = new Date(new Date(month).setMonth(startOfMonth.getMonth() + 1));
+
+    const count = await this.prisma.affiliate.count({
+      where: {
+        createdAt: {
+          gte: startOfMonth,
+          lt: endOfMonth
+        }
+      }
+    });
+
+    return count;
+  }}
