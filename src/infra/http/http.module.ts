@@ -35,6 +35,8 @@ import { DeleteAffiliateController } from './controllers/delete-affiliate-contro
 import { DeleteAffiliateUseCase } from '@/domain/affiliate/application/use-cases/delete-affiliate-use-case';
 import { GetAffiliatePaymentsController } from './controllers/get-affiliate-payments-controller';
 import { GetAffiliatePaymentsUseCase } from '@/domain/payment/application/use-cases/get-affiliate-payments-use-case';
+import { GetAffiliateInfoController } from './controllers/get-affiliate-info-controller';
+import { GetAffiliateInfoUseCase } from '@/domain/affiliate/application/use-cases/get-affiliate-info-use-case';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -45,6 +47,7 @@ import { GetAffiliatePaymentsUseCase } from '@/domain/payment/application/use-ca
     CreateAffiliateController,
     DeleteAffiliateController,
     GetAffiliatePaymentsController,
+    GetAffiliateInfoController,
     ListAffiliatesController,
     UpdateAffiliateController,
     CreatePaymentController,
@@ -64,6 +67,7 @@ import { GetAffiliatePaymentsUseCase } from '@/domain/payment/application/use-ca
     CreateAffiliateUseCase,
     DeleteAffiliateUseCase,
     GetAffiliatePaymentsUseCase,
+    GetAffiliateInfoUseCase,
     ListAffiliatesUseCase,
     UpdateAffiliateUseCase,
     CreatePaymentUseCase,

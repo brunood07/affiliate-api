@@ -9,6 +9,7 @@ interface UpdatePaymentTypeDTO {
 interface ListPaymentTypesParamsDTO {
   page: number
   limit: number
+  active?: boolean
 }
 
 interface ListPaymentTypesDTO {

@@ -6,6 +6,7 @@ import { Injectable } from "@nestjs/common"
 interface ListPaymentTypesUseCaseRequestDTO {
   page: number
   limit: number
+  active?: boolean
 }
 
 type ListPaymentTypesResponseDTO = Either<null, {
